@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="Kpembelian.css" />
+    <link rel="stylesheet" href="Konfirmasipembelian.css" />
+    <link rel="icon" href="img/logo eagle store besar.png">
+    <script src="konfirmasi.js"></script>
+  </head>
+  <body>
+    <div class="slide">
+      <div class="div">
+        <a href="index.html">
+        <img class="element" src="asset/bek-1.png" />
+      </a>
+
+        <div class="overlap-group">
+          <div class="text-wrapper">Konfirmasi Pesanan</div>
+          <div class="overlap">
+            <input class="text-wrapper-2" type="text" name="" value="" placeholder=" User ID " id="userConfirmation">
+        </div>
+
+        <div class="div-wrapper">
+          <input class="text-wrapper-3" type="text" name="" value="" placeholder=" Nomer WhatsApp " id="whatsappConfirmation">
+      </div>
+
+        <div class="overlap-2">
+          <input class="text-wrapper-10" type="text" name="" value="" placeholder=" Metode Pembayaran ">
+      </div>
+
+        <div class="overlap-3">
+          <input class="text-wrapper-9" type="text" name="" value="" placeholder=" Nominal TopUp ">
+      </div>
+
+          <div class="text-wrapper-4">User Id</div>
+          <div class="text-wrapper-5">Nominal TopUp</div>
+          <div class="text-wrapper-6">Nomer Whatsapp</div>
+          <div class="text-wrapper-7">Metode Pembayaran</div>
+          <div class="overlap-4">
+            <button type="button" onclick="sendwhatsapp();">Konfirmasi</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Mengambil nilai dari localStorage
+var userId = localStorage.getItem("user-id");
+var whatsappNumber = localStorage.getItem("whatsapp-number");
+
+// Menempatkan nilai di dalam elemen text-wrapper-2 dan text-wrapper-3
+document.querySelector(".text-wrapper-2").value = userId;
+document.querySelector(".text-wrapper-3").value = whatsappNumber;
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Mengambil nilai dari localStorage
+    var selectedValue = localStorage.getItem("selectedValue");
+    if (selectedValue) {
+      // Mengisi input yang sesuai dengan nilai yang diambil
+      if (["DANA", "OVO", "ShopeePay", "QRIS"].includes(selectedValue)) 
+        document.querySelector(".text-wrapper-10").value = selectedValue;
+    }
+  });
+
+  function sendwhatsapp() {
+  // Ambil nilai dari input fields
+  var userId = document.querySelector('.text-wrapper-2').value;
+  var nomorWhatsapp = document.querySelector('.text-wrapper-3').value;
+  var metodePembayaran = document.querySelector('.text-wrapper-10').value;
+  var nominalTopUp = document.querySelector('.text-wrapper-9').value;
+
+  // Buat pesan yang akan dikirim ke WhatsApp
+  var message = `Konfirmasi Pesanan:%0A%0AUser ID: ${userId}%0ANomer WhatsApp: ${nomorWhatsapp}%0AMetode Pembayaran: ${metodePembayaran}%0ANominal TopUp: ${nominalTopUp}`;
+
+  // Nomor WhatsApp tujuan (ganti dengan nomor WhatsApp Anda, misalnya dengan kode negara)
+  var whatsappNumber = "6285700427215";
+
+  // Buat URL untuk mengirim pesan melalui WhatsApp
+  var whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${message}`;
+
+  // Arahkan pengguna ke URL WhatsApp
+  window.open(whatsappUrl, '_blank');
+}
+    </script>
+  </body>
+</html>
+<script>
